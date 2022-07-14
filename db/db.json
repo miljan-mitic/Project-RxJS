@@ -1,0 +1,117 @@
+{
+  "ziri": [
+    {
+      "id": 1,
+      "ime": "Dragutin",
+      "kriterijum": 10
+    },
+    {
+      "id": 2,
+      "ime": "Milutin",
+      "kriterijum": 8
+    },
+    {
+      "id": 3,
+      "ime": "Tihomir",
+      "kriterijum": 7
+    },
+    {
+      "id": 4,
+      "ime": "Zitomir",
+      "kriterijum": 5
+    },
+    {
+      "id": 5,
+      "ime": "Sretko",
+      "kriterijum": 4
+    }
+  ],
+  "kuvari": [
+    {
+      "id": 1,
+      "ime": "Stefan",
+      "znanje": 10,
+      "iskustvo": 13
+    },
+    {
+      "id": 2,
+      "ime": "Milan",
+      "znanje": 9,
+      "iskustvo": 11
+    },
+    {
+      "id": 3,
+      "ime": "Nikola",
+      "znanje": 9,
+      "iskustvo": 15
+    },
+    {
+      "id": 4,
+      "ime": "Lazar",
+      "znanje": 8,
+      "iskustvo": 7
+    },
+    {
+      "id": 5,
+      "ime": "David",
+      "znanje": 7,
+      "iskustvo": 2
+    },
+    {
+      "id": 6,
+      "ime": "Luka",
+      "znanje": 7,
+      "iskustvo": 5
+    },
+    {
+      "id": 7,
+      "ime": "Uros",
+      "znanje": 6,
+      "iskustvo": 20
+    },
+    {
+      "id": 8,
+      "ime": "Zeljko",
+      "znanje": 5,
+      "iskustvo": 25
+    }
+  ],
+
+  "jela": [
+    {
+      "id": 1,
+      "naziv": "Junetina pod sac",
+      "tezina": 8,
+      "brojSastojaka": 8,
+      "vreme": 4
+    },
+    {
+      "id": 2,
+      "naziv": "Piletina u saftu",
+      "tezina": 6,
+      "brojSastojaka": 5,
+      "vreme": 2
+    },
+    {
+      "id": 3,
+      "naziv": "Pasulj",
+      "tezina": 4,
+      "brojSastojaka": 3,
+      "vreme": 6
+    },
+    {
+      "id": 4,
+      "naziv": "Kupus",
+      "tezina": 10,
+      "brojSastojaka": 7,
+      "vreme": 12
+    },
+    {
+      "id": 5,
+      "naziv": "Riba na zaru",
+      "tezina": 7,
+      "brojSastojaka": 3,
+      "vreme": 3
+    }
+  ]
+}
