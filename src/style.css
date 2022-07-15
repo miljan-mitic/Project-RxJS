@@ -1,0 +1,50 @@
+body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 741px;
+  background: url(https://imgs.search.brave.com/iMkuB2ypc4DFbPWoPFvv5Fe0Inw2G0ufG5xXaxkcoVg/rs:fit:1200:794:1/g:ce/aHR0cHM6Ly9pbWcu/dGhyZnVuLmNvbS9p/bWcvMDg5Lzg1Ni9j/b29raW5nX2NvbnRl/c3RfeDEuanBn);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.kuvari, .jelo, .ziri {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 5px;
+}
+.labelInputkuvari {
+  background-color: aqua;
+}
+.labelInputjelo {
+  background-color: blueviolet;
+}
+.labelInputziri {
+  background-color: brown;
+}
+.rezultati {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+label {
+  margin: 5px;
+  width: fit-content;
+  font-size: 30px;
+}
+input {
+  border-radius: 15%;
+  background-color: darkorange;
+  width: 50%;
+  font-size: 30px;
+}
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}

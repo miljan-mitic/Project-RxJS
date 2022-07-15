@@ -1,3 +1,23 @@
+import { Takmicar } from "../models/Takmicar";
+import { brojUlaza } from "../promenljive";
+
+export function crtajTakmicare(takmicari: Takmicar[]) {
+  const divRezultati: HTMLDivElement = document.querySelector(".rezultati");
+  divRezultati.innerHTML = "";
+
+  takmicari.forEach((takmicar, index) => {
+    const label: HTMLLabelElement = document.createElement("label");
+    label.innerHTML = `${takmicar.ime} ${takmicar.ocena.toFixed(3)}`;
+    divRezultati.appendChild(label);
+    if(index == 0) {
+      label.innerHTML += ` POBEDNIK!!!`;
+      label.className = "green";
+    } else {
+      label.className = "red";
+    }
+  });
+}
+
 export function kreirajElemente (
   labelKuvari: HTMLLabelElement[],
   inputKuvari: HTMLInputElement[],
@@ -13,7 +33,7 @@ export function kreirajElemente (
   host = document.createElement("div");
   host.className = "inputs";
   
-  for(let i = 0; i < 5; i++) {
+  for(let i = 0; i < brojUlaza.kuvari; i++) {
     const vrednosti = kreirajElement(
       labelKuvari[i],
       "Kuvar: ",
@@ -38,7 +58,7 @@ export function kreirajElemente (
     host
   );
 
-  for(let i = 0; i < 3; i++) {
+  for(let i = 0; i < brojUlaza.ziri; i++) {
     const vrednosti = kreirajElement(
       labelZiri[i],
       "Ziri: ",
@@ -69,6 +89,7 @@ function kreirajElement(
 ) {
   label = document.createElement("label");
   label.innerHTML = labelNaziv;
+  label.className = "labelInput" + divClass;
   input = document.createElement("input");
   input.placeholder = inputPlaceholder;
   div = document.createElement("div");
