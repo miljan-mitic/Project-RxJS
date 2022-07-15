@@ -1,3 +1,5 @@
+type sati = number;
+
 export interface Jelo {
   id: number,
   naziv: string,
@@ -5,5 +7,3 @@ export interface Jelo {
   brojSastojaka: number,
   vreme: sati
 }
-
-type sati = number;

@@ -16,15 +16,15 @@ let divJelo: HTMLDivElement;
 let divInputs: HTMLDivElement;
 
 const vrednosti = kreirajElemente(
-  labelZiri,
-  inputZiri,
-  divZiri,
   labelKuvari,
   inputKuvari,
   divKuvari,
   labelJelo,
   inputJelo,
   divJelo,
+  labelZiri,
+  inputZiri,
+  divZiri,
   divInputs
 );
 
@@ -33,9 +33,9 @@ inputJelo = vrednosti.input;
 divJelo = vrednosti.div;
 
 napraviTokove(
-  inputZiri,
   inputKuvari,
-  inputJelo
+  inputJelo,
+  inputZiri
 );
 
 

@@ -1,32 +1,17 @@
 export function kreirajElemente (
-  labelZiri: HTMLLabelElement[],
-  inputZiri: HTMLInputElement[],
-  divZiri: HTMLDivElement[],
   labelKuvari: HTMLLabelElement[],
   inputKuvari: HTMLInputElement[],
   divKuvari: HTMLDivElement[],
   labelJelo: HTMLLabelElement,
   inputJelo: HTMLInputElement,
   divJelo: HTMLDivElement,
+  labelZiri: HTMLLabelElement[],
+  inputZiri: HTMLInputElement[],
+  divZiri: HTMLDivElement[],
   host: HTMLDivElement
 ) {
   host = document.createElement("div");
   host.className = "inputs";
-
-  for(let i = 0; i < 3; i++) {
-    const vrednosti = kreirajElement(
-      labelZiri[i],
-      "Ziri: ",
-      inputZiri[i],
-      "Ime",
-      divZiri[i],
-      "ziri",
-      host
-    );
-    labelZiri[i] = vrednosti.label;
-    inputZiri[i] = vrednosti.input;
-    divZiri[i] = vrednosti.div;
-  }
   
   for(let i = 0; i < 5; i++) {
     const vrednosti = kreirajElement(
@@ -52,6 +37,21 @@ export function kreirajElemente (
     "jelo",
     host
   );
+
+  for(let i = 0; i < 3; i++) {
+    const vrednosti = kreirajElement(
+      labelZiri[i],
+      "Ziri: ",
+      inputZiri[i],
+      "Ime",
+      divZiri[i],
+      "ziri",
+      host
+    );
+    labelZiri[i] = vrednosti.label;
+    inputZiri[i] = vrednosti.input;
+    divZiri[i] = vrednosti.div;
+  }
 
   document.body.appendChild(host);
   
