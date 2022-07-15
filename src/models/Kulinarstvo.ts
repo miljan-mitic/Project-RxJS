@@ -1,4 +1,4 @@
-import { concatMap, delay, from, Observable, of } from "rxjs";
+import { combineLatest, concatMap, from, Observable } from "rxjs";
 import { Jelo } from "./Jelo";
 import { Kuvar } from "./Kuvar";
 import { Ziri } from "./Ziri";
@@ -6,52 +6,77 @@ import { Ziri } from "./Ziri";
 interface Takmicar {
   ime: string,
   ocene: number[],
+  ocena: number
 }
 
 export class Kulinarstvo {
   kuvari: Kuvar[];
   jelo: Jelo;
-  ziriTokovi: Observable<Ziri>[] = [];
+  ziri$: Observable<Ziri>[] = [];
   
   takmicari: Takmicar[] = [];
 
-  constructor(kuvari: Kuvar[], jelo: Jelo, ziriTokovi: Observable<Ziri>[]) {
+  constructor(kuvari: Kuvar[], jelo: Jelo, ziri$: Observable<Ziri>[]) {
     this.kuvari = kuvari;
     this.jelo = jelo;
-    this.ziriTokovi = ziriTokovi;
+    this.ziri$ = ziri$;
     this.kuvari.forEach(kuvar => {
       this.takmicari.push({
         ime: kuvar.ime,
-        ocene: []
+        ocene: [],
+        ocena: -1
       })
     });
   }
 
+  IzracunajOcenu() {
+    this.takmicari.forEach(takmicar => {
+      takmicar.ocena = Math.round((takmicar.ocene.reduce((acc, current) => acc += current, 0) / takmicar.ocene.length));
+      console.log(takmicar.ocena);
+    });
+  }
+
+  Koeficijent(kuvar: Kuvar): number {
+    return (Math.round(Math.random() * (kuvar.iskustvo + kuvar.znanje))) + (Math.abs(this.jelo.tezina  - this.jelo.vreme));
+  }
+
   OceniKuvara(ziri: Ziri, kuvar: Kuvar) {
-    let ocena = kuvar.koeficijent(this.jelo);
+    console.log(kuvar.ime, ziri.ime);
+    let ocena: number = this.Koeficijent(kuvar);
+    for(let i = 0; i < this.jelo.brojSastojaka; i++) {
+      ocena += Math.round(Math.random() * ziri.kriterijum);
+    }
     const takmicar: Takmicar = this.takmicari.find(ocena => ocena.ime === kuvar.ime);
     takmicar.ocene.push(ocena);
-    console.log(ocena);
   }
 
-  Oceni(ziri: Ziri) {
+  Oceni(ziri: Ziri[]) {
+    const ziri$ = from(ziri);
     from(this.kuvari)
       .pipe(
-        concatMap(kuvar => of(kuvar))
+        concatMap(() => ziri$, (kuvar, ziri) => {
+          return {kuvar, ziri};
+        }),
       )
-      .subscribe(kuvar => this.OceniKuvara(ziri, kuvar));
+      .subscribe(podaci => this.OceniKuvara(podaci.ziri, podaci.kuvar));
+    this.IzracunajOcenu();
   }
 
-  kreni(inputZiri: HTMLInputElement[]) {
-    for(let i = 0; i < 3; i++) {
-      this.ziriTokovi[i].subscribe((ziri: Ziri | string) => {
-        if(typeof ziri !== "string"){
-          this.Oceni(ziri);
-        } else {
-          inputZiri[i].value = "";
-          inputZiri[i].placeholder = ziri;
-        }
-      });
-    }
+  kreni() {
+    combineLatest([
+      this.ziri$[0],
+      this.ziri$[1],
+      this.ziri$[2]
+    ]).subscribe(([ziri1, ziri2, ziri3]) => {
+      if( typeof ziri1 !== "string" &&
+          typeof ziri2 !== "string" &&
+          typeof ziri3 !== "string"
+      ) {
+        this.takmicari.forEach(takmicar => {
+          takmicar.ocene = [];
+        });
+        this.Oceni([ziri1, ziri2, ziri3]);
+      }
+    })
   }
 }

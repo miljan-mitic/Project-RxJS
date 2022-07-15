@@ -13,7 +13,7 @@ function getTok(input: HTMLInputElement, kulinarstvo: string, input$: HTMLInputE
       filter((ime: string) => ime.length >= 3),
       switchMap((ime) => {
         if(input$ !== null) {
-          return getKulinarstvo(input, kulinarstvo, ime, input$)
+          return getKulinarstvo(input, kulinarstvo, ime, input$);
         }
         return getKulinarstvo(input, kulinarstvo, ime, null);
       })
@@ -38,11 +38,11 @@ function getKulinarstvo(inputt: HTMLInputElement, kulinarstvo: string, ime: stri
             if(typeof data[0] !== "undefined" && input$ !== null) {
               input$.forEach(input => {
                 if(inputt !== input && input.value === data[0].ime) {
-                  data = "Već je izabran!";
+                  data[0] = "Već je izabran!";
                 }
               });
             }
-            return data;
+            return data[0];
           });
         }
       })
@@ -59,9 +59,7 @@ export function napraviTokove (
   for(let i = 0; i < 5; i++) {
     kuvariTokovi[i] = <Observable<Kuvar>>(getTok(inputKuvari[i], "kuvari", inputKuvari));
     kuvariTokovi[i].subscribe((kuvar: Kuvar | string) => {
-      if(typeof kuvar !== "string"){
-        console.log(kuvar);
-      } else {
+      if(typeof kuvar === "string"){
         inputKuvari[i].value = "";
         inputKuvari[i].placeholder = kuvar;
       }
@@ -70,9 +68,7 @@ export function napraviTokove (
 
   const jelo = <Observable<Jelo>>(getTok(inputJelo, "jela", null));
   jelo.subscribe((jelo: Jelo | string) => {
-    if(typeof jelo !== "string"){
-      console.log(jelo);
-    } else {
+    if(typeof jelo === "string"){
       inputJelo.value = "";
       inputJelo.placeholder = jelo;
     }
@@ -81,6 +77,12 @@ export function napraviTokove (
   let ziriTokovi: Observable<Ziri>[] = [];
   for(let i = 0; i < 3; i++) {
     ziriTokovi[i] = <Observable<Ziri>>(getTok(inputZiri[i], "ziri", inputZiri));
+    ziriTokovi[i].subscribe((ziri: Ziri | string) => {
+      if(typeof ziri === "string"){
+        inputZiri[i].value = "";
+        inputZiri[i].placeholder = ziri;
+      }
+    });
   }
 
   combineLatest([
@@ -91,10 +93,16 @@ export function napraviTokove (
     kuvariTokovi[4],
     jelo
   ]).subscribe(([kuvar1, kuvar2, kuvar3, kuvar4, kuvar5, jelo]) => {
-    if(kuvar1 && kuvar2 && kuvar3 && kuvar4 && kuvar5 && jelo) {
-      const kulinarstvo = new Kulinarstvo([kuvar1, kuvar2, kuvar2, kuvar4, kuvar5], jelo, ziriTokovi);
-      kulinarstvo.kreni(inputZiri);
-      console.log([kuvar1, kuvar2, kuvar2, kuvar4, kuvar5]);
+    if( typeof kuvar1 !== "string" &&
+        typeof kuvar2 !== "string" &&
+        typeof kuvar3 !== "string" &&
+        typeof kuvar4 !== "string" &&
+        typeof kuvar5 !== "string" &&
+        typeof jelo !== "string"
+      ) {
+      console.log([kuvar1, kuvar2, kuvar3, kuvar4, kuvar5]);
+      const kulinarstvo = new Kulinarstvo([kuvar1, kuvar2, kuvar3, kuvar4, kuvar5], jelo, ziriTokovi);
+      kulinarstvo.kreni();
     }
   });
 }
