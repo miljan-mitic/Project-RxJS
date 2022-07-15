@@ -13,7 +13,7 @@ export function kreirajElemente (
   host = document.createElement("div");
   host.className = "inputs";
 
-  for(let i = 0; i < 5; i++) {
+  for(let i = 0; i < 3; i++) {
     const vrednosti = kreirajElement(
       labelZiri[i],
       "Ziri: ",
@@ -28,7 +28,7 @@ export function kreirajElemente (
     divZiri[i] = vrednosti.div;
   }
   
-  for(let i = 0; i < 3; i++) {
+  for(let i = 0; i < 5; i++) {
     const vrednosti = kreirajElement(
       labelKuvari[i],
       "Kuvar: ",
