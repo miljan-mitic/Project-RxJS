@@ -26,8 +26,8 @@ export class Kulinarstvo {
   }
 
   sortirajTakmicare() {
-    this.takmicari.sort((takmicar1, takmicar2) => takmicar2.ocena - takmicar1.ocena);
-    this.takmicari.map(takmicar => takmicar.ocena /= 5);
+    this.takmicari.sort((takmicar1, takmicar2) => takmicar2.ocena - takmicar1.ocena)
+                  .map(takmicar => takmicar.ocena /= 5);
     crtajTakmicare(this.takmicari);
   }
 
