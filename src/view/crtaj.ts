@@ -7,7 +7,7 @@ export function crtajTakmicare(takmicari: Takmicar[]) {
 
   takmicari.forEach((takmicar, index) => {
     const label: HTMLLabelElement = document.createElement("label");
-    label.innerHTML = `${takmicar.ime} ${takmicar.ocena.toFixed(3)}`;
+    label.innerHTML = `${takmicar.ime} ${takmicar.ocena.toFixed(2)} poena`;
     divRezultati.appendChild(label);
     if(index == 0) {
       label.innerHTML += ` POBEDNIK!!!`;
